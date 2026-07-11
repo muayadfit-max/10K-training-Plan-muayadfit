@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<!-- Single-file 10K Plan Finder for Muayad Fit | Coach Muayad Alabri | muayadfit.com -->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muayad Fit | 10K Plan Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1a9df1;
+            --primary-hover: #1580c7;
+            --primary-light: #e6f4fc;
+            --black: #111111;
+            --black-light: #222222;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 24px;
+            
+            --transition-fast: 0.15s ease-in-out;
+            --transition-normal: 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--black);
+            background-color: var(--gray-50);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        [dir="rtl"] body {
+            text-align: right;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .section {
+            padding: clamp(60px, 10vw, 120px) 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: none;
+            text-align: center;
+            font-family: 'Tajawal', sans-serif;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px 0 rgba(26, 157, 241, 0.39);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 157, 241, 0.23);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+            transition: all var(--transition-normal);
+        }
+        
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            font-weight: 600;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-toggle {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--border-radius-md);
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-toggle:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
+        }
+
+        .book-coaching {
+            font-weight: 700;
+            color: var(--white);
+            background-color: var(--black);
+            padding: 10px 20px;
+            border-radius: var(--border-radius-md);
+            font-size: 0.9rem;
+        }
+
+        .book-coaching:hover {
+            background-color: var(--gray-800);
+        }
+
+        /* Hero */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            color: var(--black);
+            max-width: 900px;
+            margin-inline: auto;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .trust-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .trust-content svg {
+            color: var(--primary);
+        }
+
+        /* How it works */
+        .how-it-works {
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+
+        .step-card {
+            background: var(--gray-50);
+            padding: 40px 32px;
+            border-radius: var(--border-radius-xl);
+            border: 1px solid var(--gray-100);
+            transition: transform var(--transition-normal);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            width: 64px;
+            height: 64px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px auto;
+        }
+        
+        .step-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        /* Assessment Form */
+        .assessment {
+            background-color: var(--gray-50);
+            position: relative;
+        }
+        
+        .assessment-card {
+            background: var(--white);
+            max-width: 650px;
+            margin: 0 auto;
+            border-radius: var(--border-radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        
+        [dir="rtl"] .form-group {
+            text-align: right;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-800);
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--border-radius-md);
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: all var(--transition-fast);
+            color: var(--black);
+            background-color: var(--gray-50);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Results Area */
+        .results-area {
+            max-width: 800px;
+            margin: 60px auto 0 auto;
+            display: none; /* hidden by default */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-card {
+            background: var(--white);
+            border-radius: var(--border-radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-lg);
+            border-top: 6px solid var(--primary);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .result-badge {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 99px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .result-title {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        .result-focus {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            font-weight: 500;
+            background: var(--gray-50);
+            padding: 16px;
+            border-radius: var(--border-radius-md);
+        }
+
+        .result-highlights {
+            margin: 32px 0;
+            text-align: left;
+        }
+        
+        [dir="rtl"] .result-highlights {
+            text-align: right;
+        }
+
+        .result-highlights h4 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .highlight-list li {
+            position: relative;
+            padding-left: 36px;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+            color: var(--gray-700);
+        }
+        
+        [dir="rtl"] .highlight-list li {
+            padding-left: 0;
+            padding-right: 36px;
+        }
+
+        .highlight-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a9df1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        [dir="rtl"] .highlight-list li::before {
+            left: auto;
+            right: 0;
+            transform: scaleX(-1);
+        }
+
+        .safety-note-box {
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            padding: 24px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 32px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .safety-note-box svg {
+            color: #d97706;
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+        }
+
+        .safety-note-content h4 {
+            color: #b45309;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .safety-note-content p {
+            color: #92400e;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Previews Section */
+        .previews {
+            background-color: var(--white);
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            transition: all var(--transition-normal);
+        }
+
+        .plan-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .plan-card-duration {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-500);
+            margin-bottom: 8px;
+        }
+
+        .plan-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .plan-card p {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        /* Safety Guidelines */
+        .safety {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .safety .section-header h2, 
+        .safety .section-header p {
+            color: var(--white);
+        }
+        
+        .safety .section-header p {
+            color: var(--gray-400);
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .safety-item {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .safety-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(26, 157, 241, 0.1);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .safety-item h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+        
+        .safety-item p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+        }
+
+        /* Coach Section */
+        .coach {
+            background-color: var(--gray-50);
+        }
+        
+        .coach-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: var(--white);
+            border-radius: var(--border-radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .coach-image {
+            flex: 0 0 35%;
+            aspect-ratio: 1;
+            background-color: var(--gray-200);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+        }
+        
+        .coach-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .coach-content {
+            flex: 1;
+        }
+
+        .coach-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .coach-content p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--white);
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .test-card {
+            background: var(--gray-50);
+            padding: 32px;
+            border-radius: var(--border-radius-lg);
+            position: relative;
+        }
+
+        .test-card::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-size: 4rem;
+            color: var(--primary-light);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        [dir="rtl"] .test-card::before {
+            left: auto;
+            right: 24px;
+        }
+
+        .test-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+            color: var(--gray-800);
+            font-style: italic;
+            margin-bottom: 24px;
+            margin-top: 24px;
+        }
+
+        .test-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .test-author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .test-author-info h4 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .test-author-info span {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-cta h2 {
+            color: var(--white);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 24px;
+        }
+        
+        .final-cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+        
+        .final-cta .btn {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+        
+        .final-cta .btn:hover {
+            background-color: var(--gray-50);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--black-light);
+            color: var(--gray-400);
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer p {
+            margin-bottom: 16px;
+        }
+
+        .footer a {
+            color: var(--primary);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        
+        /* Modal & Table */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: var(--white); margin: 5% auto; padding: 32px;
+            border-radius: var(--border-radius-xl); width: 95%; max-width: 1000px;
+            max-height: 85vh; overflow-y: auto; position: relative;
+        }
+        .close-modal {
+            color: var(--gray-500); position: absolute; top: 20px; right: 24px;
+            font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1;
+        }
+        [dir="rtl"] .close-modal { right: auto; left: 24px; }
+        .close-modal:hover { color: var(--black); }
+        
+        .table-responsive { overflow-x: auto; margin-top: 24px; }
+        .plan-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 800px; }
+        [dir="rtl"] .plan-table { text-align: right; }
+        .plan-table th, .plan-table td { padding: 12px 16px; border: 1px solid var(--gray-200); font-size: 0.9rem; vertical-align: top; }
+        .plan-table th { background-color: var(--gray-100); color: var(--gray-800); font-weight: 700; position: sticky; top: 0;}
+        .plan-table tr:nth-child(even) { background-color: var(--gray-50); }
+        .week-cell { background-color: var(--primary-light) !important; color: var(--primary); font-weight: 800; text-align: center; width: 80px; }
+
+        /* Marketing */
+        .marketing-section {
+            background-color: #090c0e; color: var(--white); padding: 80px 24px; position: relative;
+        }
+        .marketing-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #f5c842, #1a9df1, #f5c842);
+        }
+        .marketing-section h2 { color: var(--white); margin-bottom: 16px; font-size: clamp(2rem, 3vw, 2.5rem); }
+        .marketing-section p { color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto 32px; font-size: 1.1rem; }
+        .btn-gold { background-color: #f5c842; color: #111; box-shadow: 0 4px 14px 0 rgba(245,200,66,0.39); }
+        .btn-gold:hover { background-color: #e0b433; color: #111; box-shadow: 0 6px 20px rgba(245,200,66,0.23); }
+        .text-center { text-align: center; }
+
+        /* Mobile Adjustments */
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            [dir="rtl"] .hero-container { text-align: center; }
+            .hero-content { margin-bottom: 16px; }
+            .hero { padding-top: 120px; padding-bottom: 60px; }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .coach-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 32px;
+            }
+            
+            .coach-image {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .assessment-card {
+                padding: 32px 24px;
+            }
+            
+            .result-card {
+                padding: 32px 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .nav-actions .book-coaching {
+                display: none;
+            }
+            
+            .safety-note-box {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="nav-brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                </svg>
+                <span data-i18n="nav_brand">Muayad Fit</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#how-it-works" class="nav-item" data-i18n="nav_how">How it Works</a></li>
+                <li><a href="#plans" class="nav-item" data-i18n="nav_plans">Plans</a></li>
+                <li><a href="#safety" class="nav-item" data-i18n="nav_safety">Safety</a></li>
+                
+            </ul>
+            <div class="nav-actions">
+                <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle Language">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <span id="lang-text">العربية</span>
+                </button>
+                <a href="https://muayadfit.com" target="_blank" class="book-coaching" data-i18n="nav_book">Book Coaching</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <h1 data-i18n="hero_title">Discover Your Ideal <span>10K Plan</span></h1>
+            <p data-i18n="hero_sub">Expert, science-based running programs designed for the Gulf climate. Find the perfect progression for your current fitness level in 30 seconds.</p>
+            <a href="#assessment" class="btn btn-primary" data-i18n="hero_cta">Start Free Assessment</a>
+        </div>
+    </header>
+
+    
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="how_title">How It Works</h2>
+                <p data-i18n="how_sub">A simple, personalized approach to getting you to the 10K finish line safely and strongly.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="how_step1_title">1. Share Your Stats</h3>
+                    <p data-i18n="how_step1_desc">Input your body weight and current continuous running distance.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="how_step2_title">2. Get Analyzed</h3>
+                    <p data-i18n="how_step2_desc">Our algorithm categorizes your needs focusing heavily on joint safety and pacing.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="how_step3_title">3. Receive Plan</h3>
+                    <p data-i18n="how_step3_desc">Access a structured 6, 10, or 12-week schedule optimized for your profile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment -->
+    <section id="assessment" class="section assessment">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="form_title">Assessment Calculator</h2>
+                <p data-i18n="form_sub">Fill in the two fields below to reveal your recommended protocol.</p>
+            </div>
+            
+            <div class="assessment-card">
+                <form id="planForm" onsubmit="calculatePlan(event)">
+                    <div class="form-group">
+                        <label for="weight" class="form-label" data-i18n="form_weight">Body Weight (kg)</label>
+                        <input type="number" id="weight" class="form-control" min="30" max="250" step="0.1" placeholder="e.g. 85" required>
+                        <div id="weightError" class="error-message" data-i18n="form_error_weight">Please enter a valid weight.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distance" class="form-label" data-i18n="form_distance">Current Max Continuous Run (km)</label>
+                        <input type="number" id="distance" class="form-control" min="0" max="15" step="0.1" placeholder="e.g. 2.5" required>
+                        <div id="distanceError" class="error-message" data-i18n="form_error_distance">Please enter a valid distance.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px; font-size: 1.2rem; padding: 16px;">
+                        <span data-i18n="form_submit">Find My Ideal Plan</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Dynamic Results Area -->
+            <div id="resultsArea" class="results-area">
+                <div class="result-card">
+                    <div class="result-header">
+                        <div class="result-badge" id="resDuration" data-i18n="res_badge">Recommended Plan</div>
+                        <h3 id="resTitle" class="result-title">Title Here</h3>
+                        <div id="resFocus" class="result-focus">Focus Here</div>
+                    </div>
+
+                    
+
+                    <div class="result-highlights">
+                        <h4 data-i18n="res_highlights_title">Plan Highlights & Progression</h4>
+                        <ul id="resHighlights" class="highlight-list">
+                            <!-- Injected dynamically -->
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 40px;">
+                        <!-- Replace this placeholder with the actual published Google Doc link -->
+                        <button type="button" onclick="openCurrentPlanModal()" class="btn btn-primary" style="padding: 18px 40px; font-size: 1.15rem;"><span data-i18n="res_cta">View Full Week-by-Week Schedule</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Previews -->
+    <section id="plans" class="section previews">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="preview_title">Explore Our Plans</h2>
+                <p data-i18n="preview_sub">View the different tracks we offer. We strongly recommend using the calculator above to find the right fit for your current level.</p>
+            </div>
+            
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <div class="plan-card-duration" data-i18n="plan_12w_dur">12 Weeks</div>
+                    <h3 data-i18n="plan_12w_title">Steady Beginner</h3>
+                    <p data-i18n="plan_12w_desc">Focuses on walk/run intervals to build cardiovascular endurance while protecting joints. Ideal for heavier runners or those just starting out.</p>
+                    <button onclick="openPlanModal(\'A\')" class="btn btn-outline" data-i18n="plan_btn">View Schedule</button>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-card-duration" data-i18n="plan_10w_dur">10 Weeks</div>
+                    <h3 data-i18n="plan_10w_title">Couch to 10K</h3>
+                    <p data-i18n="plan_10w_desc">A structured progression from short walk/runs to continuous long runs. Perfect for those who can jog lightly but need to build distance.</p>
+                    <button onclick="openPlanModal(\'C\')" class="btn btn-outline" data-i18n="plan_btn">View Schedule</button>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-card-duration" data-i18n="plan_6w_dur">6 Weeks</div>
+                    <h3 data-i18n="plan_6w_title">Active Beginner</h3>
+                    <p data-i18n="plan_6w_desc">For runners who can already handle 4km+. Focuses on interval training, tempo runs, and structured weekly mileage increases.</p>
+                    <button onclick="openPlanModal(\'B\')" class="btn btn-outline" data-i18n="plan_btn">View Schedule</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Guidelines -->
+    <section id="safety" class="section safety">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="safety_title">Safety & Hot Climate Guidelines</h2>
+                <p data-i18n="safety_sub">Running in the Gulf requires specific adaptations. Follow these core principles for a safe training cycle.</p>
+            </div>
+            
+            <div class="safety-grid">
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="safety_1_title">Timing is Critical</h3>
+                    <p data-i18n="safety_1_desc">Always schedule your runs for early morning (before 7 AM) or late evening to avoid peak sun and heat exhaustion.</p>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20"></path>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="safety_2_title">Hydration Strategy</h3>
+                    <p data-i18n="safety_2_desc">Don't wait until you're thirsty. Pre-hydrate adequately and use electrolyte supplements for runs lasting longer than 45 minutes.</p>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="safety_3_title">Listen to Your Body</h3>
+                    <p data-i18n="safety_3_desc">Muscle adaptation happens during rest. Never skip your scheduled rest days, and cross-train (cycle, swim) if your joints feel overloaded.</p>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="safety_4_title">Pacing & Heart Rate</h3>
+                    <p data-i18n="safety_4_desc">Run at a conversational pace (Zone 2). If you are gasping for breath, slow down or walk. Heat naturally increases your heart rate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Section -->
+    <section class="marketing-section">
+        <div class="container text-center">
+            <h2 data-i18n="marketing_title">Looking for More?</h2>
+            <p data-i18n="marketing_desc">If you want a specific nutrition and training program tailored exactly to your body and goals, check out our premium coaching on muayadfit.com. All the information and packages are available there.</p>
+            <a href="https://muayadfit.com" target="_blank" class="btn btn-primary btn-gold" data-i18n="marketing_btn">Visit muayadfit.com</a>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="planModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom: 8px;">Training Schedule</h2>
+            <p style="color: var(--gray-600); font-size: 0.95rem; margin-bottom: 16px;" data-i18n="modal_sub">Follow this day-by-day progression. Listen to your body and never skip rest days.</p>
+            <div class="table-responsive">
+                <table class="plan-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="week_th">Week</th>
+                            <th data-i18n="day_1">Monday</th>
+                            <th data-i18n="day_2">Tuesday</th>
+                            <th data-i18n="day_3">Wednesday</th>
+                            <th data-i18n="day_4">Thursday</th>
+                            <th data-i18n="day_5">Friday</th>
+                            <th data-i18n="day_6">Saturday</th>
+                            <th data-i18n="day_7">Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                </svg>
+                <span data-i18n="footer_brand">Muayad Fit</span>
+            </div>
+            <p data-i18n="footer_credit">This assessment tool was developed by Muayad Fit • <a href="https://muayadfit.com" target="_blank">muayadfit.com</a></p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Muayad Fit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Application Logic & Translations -->
+    <script>
+        // Translations Dictionary
+        const translations = {
+            en: {
+                nav_brand: "Muayad Fit",
+                nav_how: "How it Works",
+                nav_plans: "Plans",
+                nav_safety: "Safety",
+                nav_coach: "Coach Muayad",
+                nav_book: "Book Coaching",
+                hero_title: "Discover Your Ideal <span>10K Plan</span>",
+                hero_sub: "Expert, science-based running programs designed for the Gulf climate. Find the perfect progression for your current fitness level in 30 seconds.",
+                hero_cta: "Start Free Assessment",
+                trust_text: "Trusted by runners across Oman & the GCC",
+                how_title: "How It Works",
+                how_sub: "A simple, personalized approach to getting you to the 10K finish line safely and strongly.",
+                how_step1_title: "1. Share Your Stats",
+                how_step1_desc: "Input your body weight and current continuous running distance.",
+                how_step2_title: "2. Get Analyzed",
+                how_step2_desc: "We will check which plan suits you best.",
+                how_step3_title: "3. Receive Plan",
+                how_step3_desc: "Access a structured 6, 10, or 12-week schedule optimized for your profile.",
+                form_title: "Assessment Calculator",
+                form_sub: "Fill in the two fields below to reveal your recommended protocol.",
+                form_weight: "Body Weight (kg)",
+                form_distance: "Current Max Continuous Run (km)",
+                form_error_weight: "Please enter a valid weight.",
+                form_error_distance: "Please enter a valid distance.",
+                form_submit: "Find My Ideal Plan",
+                res_badge: "Recommended Plan",
+                res_safety_title: "Gulf & Hot Climate Safety Alert",
+                res_highlights_title: "Plan Highlights & Progression",
+                res_cta: "View Full Week-by-Week Schedule",
+                preview_title: "Explore Our Plans",
+                preview_sub: "View the different tracks we offer. We strongly recommend using the calculator above to find the right fit for your current level.",
+                plan_12w_dur: "12 Weeks",
+                plan_12w_title: "12 Weeks to 10K",
+                plan_12w_desc: "Focuses on walk/run intervals to build cardiovascular endurance while protecting joints. Ideal for heavier runners or those just starting out.",
+                plan_10w_dur: "10 Weeks",
+                plan_10w_title: "10 Weeks to 10K",
+                plan_10w_desc: "A structured progression from short walk/runs to continuous long runs. Perfect for those who can jog lightly but need to build distance.",
+                plan_6w_dur: "6 Weeks",
+                plan_6w_title: "6 Weeks to 10K",
+                plan_6w_desc: "For runners who can already handle 4km+. Focuses on interval training, tempo runs, and structured weekly mileage increases.",
+                plan_btn: "View Schedule",
+                safety_title: "Safety & Hot Climate Guidelines",
+                safety_sub: "Running in the Gulf requires specific adaptations. Follow these core principles for a safe training cycle.",
+                safety_1_title: "Timing is Critical",
+                safety_1_desc: "Always schedule your runs for early morning (before 7 AM) or late evening to avoid peak sun and heat exhaustion.",
+                safety_2_title: "Hydration Strategy",
+                safety_2_desc: "Don't wait until you're thirsty. Pre-hydrate adequately and use electrolyte supplements for runs lasting longer than 45 minutes.",
+                safety_3_title: "Listen to Your Body",
+                safety_3_desc: "Muscle adaptation happens during rest. Never skip your scheduled rest days, and cross-train (cycle, swim) if your joints feel overloaded.",
+                safety_4_title: "Pacing & Heart Rate",
+                safety_4_desc: "Run at a conversational pace (Zone 2). If you are gasping for breath, slow down or walk. Heat naturally increases your heart rate.",
+                marketing_title: "Need Custom Training & Nutrition?",
+                marketing_desc: "If you need any help in terms of training and nutrition plans, and working with me one-on-one online, I can help with that. Check my website for all the details and see which plan suits you best.",
+                marketing_btn: "Visit muayadfit.com",
+                week_th: "Week",
+                day_1: "Sunday",
+                day_2: "Monday",
+                day_3: "Tuesday",
+                day_4: "Wednesday",
+                day_5: "Thursday",
+                day_6: "Friday",
+                day_7: "Saturday",
+                modal_sub: "Follow this day-by-day progression. Listen to your body and never skip rest days.",
+                
+                
+                
+                test_title: "Success Stories",
+                test_sub: "Hear from runners who followed these exact protocols to crush their 10K goals.",
+                test_1_text: "\"As a heavier runner, I was terrified of knee injuries. The 12-week plan's focus on walk/run intervals was a game changer. I finished my first 10K completely pain-free.\"",
+                test_1_name: "Ahmed S.",
+                test_1_plan: "12-Week Steady Beginner",
+                test_2_text: "\"The Couch to 10K plan perfectly balanced pushing me and keeping me safe in the Muscat heat. Coach Muayad's hydration tips saved my long runs!\"",
+                test_2_name: "Maha K.",
+                test_2_plan: "10-Week Couch to 10K",
+                test_3_text: "\"I could run 4km but always gassed out. The 6-week active plan introduced tempo and intervals that totally transformed my pacing strategy. Beat my target time!\"",
+                test_3_name: "Tariq M.",
+                test_3_plan: "6-Week Active Beginner",
+                cta_title: "Ready to Start Your Journey?",
+                cta_desc: "Take the assessment now and get your personalized, science-backed 10K training plan today.",
+                cta_btn: "Take the Assessment",
+                footer_brand: "Muayad Fit",
+                footer_credit: "This assessment tool was developed by Muayad Fit • <a href='https://muayadfit.com' target='_blank'>muayadfit.com</a>"
+            },
+            ar: {
+                nav_brand: "مؤيد فت",
+                nav_how: "كيف الطريقة",
+                nav_plans: "الخطط",
+                nav_safety: "السلامة",
+                nav_book: "احجز تدريبك",
+                hero_title: "اكتشف خطتك المثالية لسباق <span>10 كم</span>",
+                hero_sub: "برامج جري مدروسة ومصممة خصيصاً لأجواء الخليج. اعرف خطتك المناسبة لمستواك في 30 ثانية بس.",
+                hero_cta: "ابدا التقييم المجاني",
+                trust_text: "",
+                how_title: "كيف الطريقة",
+                how_sub: "طريقة بسيطة ومخصصة توصلك لخط نهاية الـ 10 كم بأمان وقوة.",
+                how_step1_title: "1. أدخل بياناتك",
+                how_step1_desc: "دخل وزنك وأقصى مسافة تقدر تجريها بشكل متواصل حالياً.",
+                how_step2_title: "2. تحليل النتائج",
+                how_step2_desc: "راح نشيك أي خطة تناسبك أكثر.",
+                how_step3_title: "3. استلم خطتك",
+                how_step3_desc: "احصل على جدول تدريبي لـ 6 أو 10 أو 12 أسبوع مصمم خصيصاً لمستواك.",
+                form_title: "حاسبة التقييم",
+                form_sub: "عبي الخانتين تحت عشان تكتشف الخطة الأنسب لك.",
+                form_weight: "الوزن (كجم)",
+                form_distance: "أقصى مسافة جري متواصل (كم)",
+                form_error_weight: "الرجاء إدخال وزن صحيح.",
+                form_error_distance: "الرجاء إدخال مسافة صحيحة.",
+                form_submit: "اكتشف خطتي",
+                res_badge: "الخطة الموصى بها",
+                res_safety_title: "تنبيه السلامة لأجواء الخليج",
+                res_highlights_title: "أبرز نقاط الخطة والتقدم",
+                res_cta: "عرض الجدول الأسبوعي الكامل",
+                preview_title: "استكشف خططنا",
+                preview_sub: "اطلع على المسارات المختلفة اللي نقدمها. ننصحك تستخدم الحاسبة فوق عشان تعرف الخطة المناسبة لمستواك.",
+                plan_12w_dur: "12 أسبوع",
+                plan_12w_title: "12 أسبوع للـ 10 كم",
+                plan_12w_desc: "تركز الخطة على المشي والجري مع بعض عشان نرفع لياقتك ونحمي مفاصلك. ممتازة جداً للأوزان الثقيلة أو اللي بيبدأون من الصفر.",
+                plan_10w_dur: "10 أسابيع",
+                plan_10w_title: "10 أسابيع للـ 10 كم",
+                plan_10w_desc: "تدرج مريح من المشي والجري الخفيف إلى الجري المتواصل. تناسب اللي يقدرون يهرولون خفيف بس يحتاجون يرفعون المسافة.",
+                plan_6w_dur: "6 أسابيع",
+                plan_6w_title: "6 أسابيع للـ 10 كم",
+                plan_6w_desc: "للعدائين اللي يركضون 4 كم وفوق. نركز فيها على تمارين الفترات (الإنترفل) والتمبو وزيادة المسافة بشكل مدروس.",
+                plan_btn: "عرض الجدول",
+                safety_title: "إرشادات السلامة وأجواء الخليج",
+                safety_sub: "الجري عندنا يحتاج تكتيك مختلف. اتبع هذي النصائح الأساسية عشان تتمرن بأمان.",
+                safety_1_title: "التوقيت جداً مهم",
+                safety_1_desc: "دايماً خل تمرينك الصباح بدري (قبل 7) أو في المساء عشان تتجنب الشمس والإجهاد الحراري.",
+                safety_2_title: "طريقة شرب الماي",
+                safety_2_desc: "لا تنتظر لين تعطش. اشرب ماي قبل التمرين واستخدم أملاح (إلكتروليتس) لتمارينك اللي تطوف 45 دقيقة.",
+                safety_3_title: "اسمع لجسمك",
+                safety_3_desc: "العضلات تبني نفسها وقت الراحة. لا تسحب على أيام الراحة المجدولة، وإذا حسيت بضغط على مفاصلك بدل التمرين لسباحة أو سيكل.",
+                safety_4_title: "السرعة ونبض القلب",
+                safety_4_desc: "اركض بسرعة خفيفة تقدر تسولف فيها. إذا حسيت إنك تلهث، خفف السرعة أو امش. طبيعي النبض يرتفع مع الحر.",
+                marketing_title: "تحتاج برنامج تدريبي وغذائي مخصص لك؟",
+                marketing_desc: "إذا كنت محتاج أي مساعدة بخصوص البرامج الغذائية والتدريبية وتبي تشتغل معي أونلاين بشكل شخصي، أقدر أساعدك في هذا الشيء. شيك على موقعي لكل التفاصيل واختار الباقة اللي تناسبك.",
+                marketing_btn: "زور muayadfit.com",
+                test_title: "قصص نجاح",
+                test_sub: "شوف تجارب اللي طبقوا هذي الجداول وحققوا أهدافهم في الـ 10 كم.",
+                test_1_text: '\"كشخص وزنه ثقيل، كنت خايف جداً على ركبي. نظام المشي والجري في خطة الـ 12 أسبوع كان خيالي. خلصت أول 10 كم لي وبدون أي إصابات أو ألم.\"',
+                test_1_name: "أحمد س.",
+                test_1_plan: "12 أسبوع - المبتدئ المستمر",
+                test_2_text: '\"خطة من الكنب للـ 10 كم شدتني صح وبنفس الوقت حافظت علي في حر مسقط. نصايح الكابتن مؤيد للترطيب أنقذت جرياتي الطويلة!\"',
+                test_2_name: "مها ك.",
+                test_2_plan: "10 أسابيع - من الكنب لـ 10 كم",
+                test_3_text: '\"كنت أقدر أجري 4 كم بس أتعب بسرعة. خطة الـ 6 أسابيع دخلت فيها تمارين تمبو وفترات غيرت طريقتي في تنظيم السرعة بالكامل. وحطمت رقمي!\"',
+                test_3_name: "طارق م.",
+                test_3_plan: "6 أسابيع - المبتدئ النشط",
+                cta_title: "جاهز تبدأ رحلتك؟",
+                cta_desc: "سوي التقييم الحين وخذ خطتك المبنية على أسس علمية اليوم.",
+                cta_btn: "سوي التقييم",
+                footer_brand: "مؤيد فت",
+                footer_credit: "هذي الأداة تم تطويرها بواسطة مؤيد فت • <a href='https://muayadfit.com' target='_blank'>muayadfit.com</a>",
+                week_th: "الأسبوع",
+                day_1: "الأحد",
+                day_2: "الاثنين",
+                day_3: "الثلاثاء",
+                day_4: "الأربعاء",
+                day_5: "الخميس",
+                day_6: "الجمعة",
+                day_7: "السبت",
+                modal_sub: "امش على هذا الجدول يوماً بيوم. اسمع لجسمك ولا تفوت أيام الراحة."
+            }
+        };
+
+        
+        let currentRecommendedPlan = 'A';
+
+        const plansData = {
+            'A': [
+                ['1', '10x (30s run / 1m walk)', 'Cross Train 30m', 'Rest', '10x (1m run / 1m walk)', 'Cross Train 30m', '12x (1m run / 1m walk)', 'Rest'],
+                ['2', '10x (90s run / 1m walk)', 'Cross Train 25m', 'Rest', '8x (2m run / 1m walk)', 'Cross Train 30m', '10x (90s run / 30s walk)', 'Rest'],
+                ['3', '8x (2:30 run / 1m walk)', 'Cross Train 30m', 'Rest', '8x (3m run / 1m walk)', 'Cross Train 30m', '6x (4m run / 1m walk)', 'Rest'],
+                ['4', '5x (5m run / 1m walk)', 'Cross Train 35m', 'Rest', '2x (10m run / 1m walk)', 'Cross Train 30m', '2x (10m run / 30s walk)', 'Rest'],
+                ['5', 'Easy 40m', 'Cross Train 35m', 'Rest', 'Run 15m or Cross 30m', 'Easy/Cross 30m', 'Easy 3.2km (Continuous)', 'Rest'],
+                ['6', 'Easy 45m', 'Cross Train 40m', 'Rest', 'Run 15m or Cross 30m', 'Easy/Cross 30m', 'Easy 4.8km', 'Rest'],
+                ['7', 'Easy 5.6km', 'Cross Train 45m', 'Rest', 'Run 15m or Cross 30m', 'Easy/Cross 30m', 'Fartlek 5.6km (10x 1m hard)', 'Rest'],
+                ['8', 'Easy 7.2km', 'Cross Train 50m', 'Rest', 'Run 15m or Cross 30m', 'Easy/Cross 30m', 'Fartlek 6.4km (10x 1m hard)', 'Rest'],
+                ['9', 'Easy 7.2km', 'Cross Train 50m', 'Rest', 'Run 20m or Cross 30m', 'Easy/Cross 30m', 'Fartlek 7.2km (6x 2m hard)', 'Rest'],
+                ['10', 'Easy 8km', 'Cross Train 60m', 'Rest', 'Run 20m or Cross 30m', 'Easy/Cross 30m', 'Fartlek 8km (4x 3m hard)', 'Rest'],
+                ['11', 'Easy 9.6km', 'Cross Train 55m', 'Rest', 'Easy 8.8km', 'Run 6.4km (2x 5m hard)', 'Easy 6.4km (2x 5m hard)', 'Rest'],
+                ['12', 'Easy 6.4km', 'Cross Train 35m', 'Easy 45m', 'Rest', 'Shake Out 3-4km', 'RACE DAY! 10K', 'Rest']
+            ],
+            'B': [
+                ['1', '10x (30s run / 1m walk)', 'Cross Train 30m', 'Rest', '8x (3m run / 1m walk)', 'Cross Train 30m', '6x (4m run / 1m walk)', 'Rest'],
+                ['2', '10x (90s run / 1m walk)', 'Cross Train 35m', 'Rest', '2x (10m run / 30s walk)', 'Cross Train 30m', 'Easy 3km', 'Rest'],
+                ['3', 'Easy 4km', 'Cross Train 45m', 'Rest', 'Easy 5km', 'Easy/Cross 30m', 'Easy 5.5km', 'Rest'],
+                ['4', 'Easy 6.5km', 'Cross Train 45m', 'Rest', 'Interval 5km (10x 1m hard)', 'Easy/Cross 30m', 'Easy 7km', 'Rest'],
+                ['5', 'Easy 8km', 'Cross Train 50m', 'Rest', 'Interval 8km (10x 1m hard)', 'Easy 20m / Cross 30m', 'Easy 9-10km', 'Rest'],
+                ['6', 'Easy 6.5km', 'Cross Train 45m', 'Rest', 'Taper 20m + 4x75m strides', 'Rest', 'RACE DAY! 10K', 'Rest']
+            ],
+            'C': [
+                ['1', '5x (30s jog / 30s walk) + 10m jog', 'Rest', 'Easy Jog 15m', 'Rest', 'Rest', '10x (1m jog / 30s walk) + 15m jog', 'Rest'],
+                ['2', '10x (30s jog / 30s walk) + 10m jog', 'Rest', 'Easy Jog 20m', 'Rest', 'Rest', '5x (5m jog / 1m walk) + Walk 40m', 'Rest'],
+                ['3', '3x (10m jog / 90s walk)', 'Rest', 'Easy Jog 25m', 'Rest', 'Active Rest: Jog 10m', '10m jog, 3m walk, 10m jog', 'Rest'],
+                ['4', '10x (3m jog / 1m walk)', 'Rest', 'Easy Jog 25m', 'Rest', 'Rest', '20m jog, 90s walk, 10m jog', 'Rest'],
+                ['5', '6x (5m jog / 1m walk)', 'Rest', 'Easy Jog 25m', 'Rest', '15m jog, 90s walk, 15m jog', 'Walk 45m', 'Rest'],
+                ['6', '10x (4m jog / 60s walk)', 'Rest', 'Easy 30m', 'Rest', '15m jog, 90s walk, 15m jog', 'Easy 35m', 'Rest'],
+                ['7', 'Tempo 30m + 4x100m strides', 'Rest', 'Intervals (4x var. run/walk)', 'Rest', 'Easy 45m', 'Walk 45m', 'Rest'],
+                ['8', 'Tempo 30m + 4x100m strides', 'Rest', '20m jog, 90s walk, 10m jog', 'Rest', 'Easy 50m', 'Walk 60m', 'Rest'],
+                ['9', 'Tempo 30m + 4x100m strides', 'Rest', '10x (1m jog / 1m walk) x2', 'Rest', 'Easy 5km', 'Walk 45m', 'Rest'],
+                ['10', 'Tempo 30m + 4x100m strides', 'Rest', 'Pyramid Intervals', 'Rest', 'Taper Easy 15m', 'RACE DAY! 10K', 'Rest']
+            ]
+        };
+
+        function openCurrentPlanModal() {
+            openPlanModal(currentRecommendedPlan);
+        }
+
+        function openPlanModal(planType) {
+            const tbody = document.getElementById('modalTableBody');
+            const title = document.getElementById('modalTitle');
+            tbody.innerHTML = '';
+            
+            let planName = '';
+            if (planType === 'A') planName = currentLang === 'en' ? '12 Weeks to 10K' : '12 أسبوع للـ 10 كم';
+            if (planType === 'B') planName = currentLang === 'en' ? '6 Weeks to 10K' : '6 أسابيع للـ 10 كم';
+            if (planType === 'C') planName = currentLang === 'en' ? '10 Weeks to 10K' : '10 أسابيع للـ 10 كم';
+            
+            title.textContent = planName;
+            
+            plansData[planType].forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach((cell, idx) => {
+                    const td = document.createElement('td');
+                    if (idx === 0) {
+                        td.className = 'week-cell';
+                        td.textContent = (currentLang === 'en' ? 'W' : 'أسبوع ') + cell;
+                    } else {
+                        td.textContent = cell;
+                    }
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('planModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('planModal').style.display = 'none';
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('planModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            // Update direction and font
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // Update toggle button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'العربية' : 'English';
+            
+            // Translate all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                        // Handle placeholders if needed (currently using generic numbers)
+                    } else {
+                        element.innerHTML = translations[currentLang][key];
+                    }
+                }
+            });
+
+            // Re-render results if already displayed
+            const resultsArea = document.getElementById('resultsArea');
+            if (resultsArea.style.display === 'block') {
+                const weight = parseFloat(document.getElementById('weight').value);
+                const distance = parseFloat(document.getElementById('distance').value);
+                if (!isNaN(weight) && !isNaN(distance)) {
+                    renderResults(weight, distance);
+                }
+            }
+        }
+
+        function calculatePlan(event) {
+            event.preventDefault();
+            
+            const weightInput = document.getElementById('weight');
+            const distanceInput = document.getElementById('distance');
+            const weightError = document.getElementById('weightError');
+            const distanceError = document.getElementById('distanceError');
+            
+            let isValid = true;
+            
+            const weight = parseFloat(weightInput.value);
+            const distance = parseFloat(distanceInput.value);
+            
+            if (isNaN(weight) || weight <= 0) {
+                weightError.style.display = 'block';
+                isValid = false;
+            } else {
+                weightError.style.display = 'none';
+            }
+            
+            if (isNaN(distance) || distance < 0) {
+                distanceError.style.display = 'block';
+                isValid = false;
+            } else {
+                distanceError.style.display = 'none';
+            }
+            
+            if (isValid) {
+                renderResults(weight, distance);
+                
+                // Smooth scroll to results
+                setTimeout(() => {
+                    document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        function renderResults(weight, distance) {
+            const resultsArea = document.getElementById('resultsArea');
+            const resDuration = document.getElementById('resDuration');
+            const resTitle = document.getElementById('resTitle');
+            const resFocus = document.getElementById('resFocus');
+            const resHighlights = document.getElementById('resHighlights');
+            
+            let planType = ''; // 'A', 'B', or 'C'
+            
+            // Categorization Logic
+            if (weight >= 100 || distance < 2) {
+                planType = 'A';
+            } else if (weight < 100 && distance >= 4) {
+                planType = 'B';
+            } else {
+                planType = 'C';
+            }
+            
+            // Populate based on logic and language
+            currentRecommendedPlan = planType;
+            resHighlights.innerHTML = ''; // Clear previous
+            
+            if (planType === 'A') {
+                resDuration.textContent = currentLang === 'en' ? '12-Week Protocol' : 'بروتوكول ١٢ أسبوعاً';
+                resTitle.textContent = currentLang === 'en' ? '12 Weeks to 10K' : '12 أسبوع للـ 10 كم';
+                resFocus.innerHTML = currentLang === 'en' 
+                    ? '<strong>Focus:</strong> Walk/run intervals + musculoskeletal protection and joint safety.'
+                    : '<strong>التركيز:</strong> فترات المشي/الجري + حماية العضلات والعظام وسلامة المفاصل.';
+                
+                const highlights = currentLang === 'en' ? [
+                    "Weeks 1-4: Foundation building starting with 1 min run / 1 min walk intervals.",
+                    "Weeks 5-8: Introduction to continuous Easy Runs (up to 4.5 miles/7.2 km).",
+                    "Weeks 9-12: Gentle Fartlek (speed play) introductions with 1-2 min hard efforts.",
+                    "Always run at a conversation pace (Zone 2) for easy runs.",
+                    "Focuses heavily on low-impact cross-training (cycling/swimming) 3x a week."
+                ] : [
+                    "الأسابيع 1-4: بناء الأساس بدءاً بفترات دقيقة جري / دقيقة مشي.",
+                    "الأسابيع 5-8: مقدمة للجري المستمر السهل (حتى 7.2 كم).",
+                    "الأسابيع 9-12: مقدمة لتمارين الفارتلك (لعب السرعة) الخفيفة مع جهود قوية لمدة دقيقة إلى دقيقتين.",
+                    "الركض دائماً بسرعة تسمح لك بالتحدث (المنطقة 2) في الجري السهل.",
+                    "يركز بشدة على التدريب المتقاطع منخفض التأثير (الدراجة/السباحة) 3 مرات أسبوعياً."
+                ];
+                
+                highlights.forEach(text => {
+                    const li = document.createElement('li');
+                    li.textContent = text;
+                    resHighlights.appendChild(li);
+                });
+                
+            } else if (planType === 'B') {
+                resDuration.textContent = currentLang === 'en' ? '6-Week Protocol' : 'بروتوكول 6 أسابيع';
+                resTitle.textContent = currentLang === 'en' ? '6 Weeks to 10K' : '6 أسابيع للـ 10 كم';
+                resFocus.innerHTML = currentLang === 'en' 
+                    ? '<strong>Focus:</strong> Interval running, tempo efforts, and structured weekly mileage progression.'
+                    : '<strong>التركيز:</strong> الجري الفتري، وتمارين الإيقاع (التمبو)، وزيادة المسافات الأسبوعية بشكل منظم.';
+                
+                const highlights = currentLang === 'en' ? [
+                    "Weeks 1-2: Baseline building with 10x 1-minute interval runs and 5-6 km easy runs.",
+                    "Weeks 3-4: Volume increase with longer continuous runs (up to 7 km).",
+                    "Weeks 5-6: Peak week hitting 9-10 km easy runs, followed by a taper before race day.",
+                    "Incorporates dedicated active recovery (cross-training) to manage volume spikes.",
+                    "Progression focuses on pushing aerobic threshold while maintaining a safe 10K target."
+                ] : [
+                    "الأسابيع 1-2: بناء الأساس مع 10 فترات جري لمدة دقيقة وجري سهل لمسافة 5-6 كم.",
+                    "الأسابيع 3-4: زيادة الحجم التدريبي مع جري مستمر أطول (حتى 7 كم).",
+                    "الأسابيع 5-6: أسبوع الذروة مع جري سهل لمسافة 9-10 كم، يليه تخفيف قبل يوم السباق.",
+                    "يتضمن استرداداً نشطاً مخصصاً (تدريب متقاطع) لإدارة زيادات الحجم التدريبي.",
+                    "يركز التقدم على دفع العتبة الهوائية مع الحفاظ على هدف آمن لسباق الـ 10 كم."
+                ];
+                
+                highlights.forEach(text => {
+                    const li = document.createElement('li');
+                    li.textContent = text;
+                    resHighlights.appendChild(li);
+                });
+                
+            } else if (planType === 'C') {
+                resDuration.textContent = currentLang === 'en' ? '10-Week Protocol' : 'بروتوكول ١٠ أسابيع';
+                resTitle.textContent = currentLang === 'en' ? '10 Weeks to 10K' : '10 أسابيع للـ 10 كم';
+                resFocus.innerHTML = currentLang === 'en' 
+                    ? '<strong>Focus:</strong> Steady endurance building transitioning smoothly to progressive long runs.'
+                    : '<strong>التركيز:</strong> بناء قدرة التحمل الثابتة والانتقال السلس إلى الجري الطويل التدريجي.';
+                
+                const highlights = currentLang === 'en' ? [
+                    "Weeks 1-3: Walk/Run phases starting at 30s run/30s walk, gradually building sustained jogging time.",
+                    "Weeks 4-6: Transition to continuous easy runs, reaching up to 30-40 minutes without stopping.",
+                    "Weeks 7-10: Introduction of Tempo runs with strides to improve running economy.",
+                    "Peak long run reaches up to 1 hour (approx. 8-9km) before tapering.",
+                    "Strategic Active Rest days (30-60 min walks) to maintain blood flow and mobility."
+                ] : [
+                    "الأسابيع 1-3: مراحل المشي/الجري تبدأ بـ 30 ثانية جري / 30 ثانية مشي، مع بناء وقت الهرولة المستمر تدريجياً.",
+                    "الأسابيع 4-6: الانتقال إلى الجري المستمر السهل، لتصل إلى 30-40 دقيقة دون توقف.",
+                    "الأسابيع 7-10: إدخال تمارين الإيقاع (التمبو) مع تسارعات قصيرة (strides) لتحسين اقتصادية الجري.",
+                    "تصل أطول مسافة جري إلى ساعة واحدة (حوالي 8-9 كم) قبل التخفيف التدريجي.",
+                    "أيام راحة نشطة استراتيجية (مشي 30-60 دقيقة) للحفاظ على تدفق الدم والحركة."
+                ];
+                
+                highlights.forEach(text => {
+                    const li = document.createElement('li');
+                    li.textContent = text;
+                    resHighlights.appendChild(li);
+                });
+            }
+            
+            resultsArea.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
